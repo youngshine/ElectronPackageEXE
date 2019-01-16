@@ -1,0 +1,13 @@
+read -p "请输入.exe包的打包版本号:" versions
+read -p "请输入.exe包的包名:" app_name
+today=`date +%s`
+echo $today
+package_name=${app_name}"["${today}"]"
+root_path=$(dirname $0)
+cd ${root_path}
+
+rm -rf out
+electron-packager . $package_name --platform=win32 --arch=x64 --icon=icon.ico --out=./out --asar --app-version=$versions
+
+echo "completed!"
+exit 0;
